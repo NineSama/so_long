@@ -4,7 +4,14 @@ SRCS_DIR = srcs/
 
 GNL_DIR = GNL/
 
-SRCS =		main.c 
+SRCS =		main.c \
+			get_next_line.c \
+			parsing.c \
+			map_to_win.c \
+			valid.c \
+			utils.c \
+			init.c \
+			move.c
 
 _DEPS =		so_long.h
 
@@ -22,7 +29,7 @@ CFLAGS =	-Wall -Werror -Wextra -g
 
 MLX =		./mlx
 
-MLX_LIB = 	./mlx/libmlx_Linux.a
+MLX_LIB = 	./mlx/libmlx.a
 
 .c.o:		${DEPS} 
 		${CC} ${CFLAGS} -I${INCL} -I${MLX} -g3 -c $< -o ${<:.c=.o}
@@ -36,9 +43,6 @@ $(MLX_LIB):
 
 
 all:		${NAME}
-
-malloc_test: $(OBJS) $(MLX_LIB)
-	$(CC) ${OBJS} $(CFLAGS) -fsanitize=undefined -rdynamic -o $@ ${MLX_LIB} -L. -lmallocator
 
 clean:		
 		${RM} ${OBJS}
