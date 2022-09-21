@@ -6,16 +6,41 @@
 /*   By: mfroissa <mfroissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 12:25:57 by mfroissa          #+#    #+#             */
-/*   Updated: 2022/09/20 23:07:48 by mfroissa         ###   ########.fr       */
+/*   Updated: 2022/09/21 17:30:01 by mfroissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 #include "get_next_line.h"
 
+void	map_to_win_2(t_data *data, char c, int y, int x)
+{
+	if (c == 'W')
+	{
+		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
+			data->image.wall, x * 100, y * 100);
+		data->pos_x = x;
+		data->pos_y = y;
+	}
+	if (c == 'D')
+	{
+		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
+			data->image.pers_right, x * 100, y * 100);
+		data->pos_x = x;
+		data->pos_y = y;
+	}
+	if (c == 'A')
+	{
+		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
+			data->image.pers_left, x * 100, y * 100);
+		data->pos_x = x;
+		data->pos_y = y;
+	}
+}
+
 void	map_to_win(t_data *data, char c, int y, int x)
 {
-	if (c == '0')
+	if (c == '0') // proteger mlx de merde et free tout ce qui a avant
 		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
 			data->image.ground, x * 100, y * 100);
 	if (c == '1')
@@ -24,16 +49,22 @@ void	map_to_win(t_data *data, char c, int y, int x)
 	if (c == 'P')
 	{
 		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
-			data->image.pers, x * 100, y * 100);
+			data->image.wall, x * 100, y * 100);
 		data->pos_x = x;
-		data->pos_x = y;
+		data->pos_y = y;
 	}
 	if (c == 'E')
+	{
 		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
 			data->image.exit, x * 100, y * 100);
+		data->exit_x = x;
+		data->exit_y = y;
+	}
 	if (c == 'C')
 		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
 			data->image.cons, x * 100, y * 100);
+	else
+		map_to_win_2(data, c, y, x);
 }
 
 int	transfer(t_data *data)
@@ -47,7 +78,7 @@ int	transfer(t_data *data)
 		j = 0;
 		while (j < data->map.width)
 		{
-			map_to_win(data, data->map.map[i][j], i, j);
+			map_to_win(data, data->map.map[i][j], i, j); //rjouter valeur de retour et free si !map_to_win
 			j++;
 		}
 		i++;

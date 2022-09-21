@@ -6,7 +6,7 @@
 /*   By: mfroissa <mfroissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 21:25:33 by mfroissa          #+#    #+#             */
-/*   Updated: 2022/09/20 21:12:28 by mfroissa         ###   ########.fr       */
+/*   Updated: 2022/09/21 13:19:29 by mfroissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,8 @@ int	count_amount(t_data *data)
 				data->map.count_exit++;
 			else if (data->map.map[i][j] == 'C')
 				data->map.count_cons++;
+			else if (data->map.map[i][j] != '0' && data->map.map[i][j] != '1')
+				return (0);
 			j++;
 		}
 		i++;

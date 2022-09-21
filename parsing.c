@@ -6,7 +6,7 @@
 /*   By: mfroissa <mfroissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 18:56:22 by mfroissa          #+#    #+#             */
-/*   Updated: 2022/09/20 21:16:34 by mfroissa         ###   ########.fr       */
+/*   Updated: 2022/09/21 17:26:45 by mfroissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ void	get_map(t_data *data)
 	while (line)
 	{
 		data->map.map[n_line] = malloc(sizeof(char) * (ft_strlen(line) + 1));
+		if (!data->map.map[n_line])
+			return ; // free et valeur de retour a ajouter
 		i = 0;
 		while (line[i] && line[i] != '\n')
 		{
@@ -69,6 +71,7 @@ int	is_ber(t_data *data)
 		return (1);
 	return (0);
 }
+// dossier .ber
 
 int	create_map(t_data *data)
 {
@@ -84,7 +87,8 @@ int	create_map(t_data *data)
 	if (!data->map.map)
 		return (0);
 	initialising_values(data);
-	initialising_imgs(data);
+	if (!initialising_imgs(data))
+		return (free_all(data, 'h'), 0);
 	get_map(data);
 	return (is_valid(data));
 }

@@ -6,7 +6,7 @@
 /*   By: mfroissa <mfroissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 16:23:45 by mfroissa          #+#    #+#             */
-/*   Updated: 2022/09/20 23:38:49 by mfroissa         ###   ########.fr       */
+/*   Updated: 2022/09/21 17:20:29 by mfroissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ typedef struct  s_image
 	void	*cons;
 	void	*ground;
 	void	*wall;
-	void	*pers;
+	void	*pers_right;
+	void	*pers_left;
 	void	*exit;
 }               t_image;
 
@@ -55,14 +56,18 @@ typedef struct  s_data
 	void    *mlx_ptr;
 	void    *win_ptr;
 	char	*path;
+	int		exit_x;
+	int		exit_y;
 	int		pos_x;
 	int		pos_y;
+	int		counter;
 	t_image  image;
 	t_map   map;
 }               t_data;
 
 /* utils.c */
-int	ft_strlen(char *line);
+int		ft_strlen(char *line);
+void	free_all(t_data *data, char c);
 
 /* valid.c */
 int		is_rectangle(t_data *data);
@@ -82,9 +87,11 @@ int		transfer(t_data *data);
 
 /* init.c */
 void	initialising_values(t_data *data);
-void	initialising_imgs(t_data *data);
+int		initialising_imgs(t_data *data);
 
 /* move.c */
+void	exit_game(t_data *data);
+int		my_exit(t_data *data, char c);
 int		check_next_case(t_data *data, char c);
 void	move_player(t_data *data, int c);
 int		handle_keypress(int keysym, t_data *data);
