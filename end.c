@@ -6,7 +6,7 @@
 /*   By: mfroissa <mfroissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 23:15:24 by mfroissa          #+#    #+#             */
-/*   Updated: 2022/09/23 19:23:50 by mfroissa         ###   ########.fr       */
+/*   Updated: 2022/09/23 21:56:38 by mfroissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	exit_game(t_data *data)
 {
 	char	*itoto;
-	
+
 	if (data->pos_x == data->exit_x && data->pos_y == data->exit_y)
 	{
 		itoto = ft_itoa(data->pas);
@@ -71,11 +71,16 @@ void	free_all(t_data *data, char c)
 			i++;
 		}
 	}
-	free(data->map.map);
+	if (data->map.map)
+		free(data->map.map);
 	destroy_images(data);
-	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
-	mlx_destroy_display(data->mlx_ptr);
-	free(data->mlx_ptr);
+	if (data->win_ptr)
+		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+	if (data->mlx_ptr)
+	{
+		mlx_destroy_display(data->mlx_ptr);
+		free(data->mlx_ptr);
+	}
 	free(data);
 }
 

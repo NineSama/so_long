@@ -6,7 +6,7 @@
 /*   By: mfroissa <mfroissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 16:23:45 by mfroissa          #+#    #+#             */
-/*   Updated: 2022/09/23 19:29:25 by mfroissa         ###   ########.fr       */
+/*   Updated: 2022/09/23 22:10:38 by mfroissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # define D_KEY			100
 # define ESC			65307
 
-typedef struct	s_pf
+typedef struct s_pf
 {
 	int		count_cons;
 	int		count_exit;
@@ -37,34 +37,34 @@ typedef struct	s_pf
 	int		pos_y;
 }				t_pf;
 
-typedef struct  s_map
+typedef struct s_map
 {
-	int     fd;
-	char    **map;
-	int     height;
-	int     width;
+	int		fd;
+	char	**map;
+	int		height;
+	int		width;
 	int		count_cons;
 	int		count_pers;
 	int		count_exit;
 
-}               t_map;
+}				t_map;
 
-typedef struct  s_image
+typedef struct s_image
 {
-	int 	width;
-	int 	height;
+	int		width;
+	int		height;
 	void	*cons;
 	void	*ground;
 	void	*wall;
 	void	*pers_right;
 	void	*pers_left;
 	void	*exit;
-}               t_image;
+}				t_image;
 
-typedef struct  s_data
+typedef struct s_data
 {
-	void    *mlx_ptr;
-	void    *win_ptr;
+	void	*mlx_ptr;
+	void	*win_ptr;
 	char	*path;
 	int		pas;
 	int		exit_x;
@@ -75,7 +75,7 @@ typedef struct  s_data
 	t_image	image;
 	t_map	map;
 	t_pf	pf;
-}               t_data;
+}				t_data;
 
 /* utils.c */
 int		ft_strlen(char *line);
@@ -91,14 +91,14 @@ int		count_amount(t_data *data);
 int		is_valid(t_data *data);
 
 /* parsing.c */
-void	get_map(t_data *data);
+int		get_map(t_data *data);
 int		get_map_height(t_data *data);
 int		create_map(t_data *data);
 
 /* map_to_win */
 void	map_to_win_3(t_data *data, char c, int y, int x);
-void    map_to_win_2(t_data *data, char c, int y, int x);
-void    map_to_win(t_data *data, char c, int y, int x);
+void	map_to_win_2(t_data *data, char c, int y, int x);
+void	map_to_win(t_data *data, char c, int y, int x);
 int		transfer(t_data *data);
 
 /* init.c */
@@ -112,7 +112,6 @@ int		check_next_case(t_data *data, char c);
 void	move_player2(t_data *data, int c);
 void	move_player(t_data *data, int c);
 int		handle_keypress(int keysym, t_data *data);
-int		handle_keyrelease(int keysym, t_data *data);
 
 /* end.c */
 void	exit_game(t_data *data);
@@ -127,5 +126,9 @@ int		pf_check_next(t_data *data, char c, int y, int x);
 int		pf_check_exit(t_data *data, char c, int y, int x);
 void	get_obj(t_data *data);
 int		pathfind_exit(t_data *data, int y, int x);
+
+/* main.c */
+int		so_long_core(t_data *data);
+int		check_dir(char *path);
 
 #endif

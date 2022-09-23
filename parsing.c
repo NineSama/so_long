@@ -6,7 +6,7 @@
 /*   By: mfroissa <mfroissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 18:56:22 by mfroissa          #+#    #+#             */
-/*   Updated: 2022/09/23 19:15:18 by mfroissa         ###   ########.fr       */
+/*   Updated: 2022/09/23 22:05:57 by mfroissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	get_pos_exit(t_data *data, int y, int x)
 	}
 }
 
-void	get_map(t_data *data)
+int	get_map(t_data *data)
 {
 	int		i;
 	int		n_line;
@@ -53,12 +53,11 @@ void	get_map(t_data *data)
 	data->map.fd = open(data->path, O_RDONLY);
 	line = get_next_line(data->map.fd);
 	n_line = 0;
-	i = 0;
 	while (line)
 	{
 		data->map.map[n_line] = malloc(sizeof(char) * (ft_strlen(line) + 1));
 		if (!data->map.map[n_line])
-			return ; //truc truc
+			return (0);
 		i = 0;
 		while (line[i] && line[i] != '\n')
 		{
@@ -71,6 +70,7 @@ void	get_map(t_data *data)
 		free(line);
 		line = get_next_line(data->map.fd);
 	}
+	return (1);
 }
 
 int	is_ber(t_data *data)
@@ -86,7 +86,6 @@ int	is_ber(t_data *data)
 		return (1);
 	return (0);
 }
-// dossier .ber
 
 int	create_map(t_data *data)
 {
@@ -104,6 +103,7 @@ int	create_map(t_data *data)
 	initialising_values(data);
 	if (!initialising_imgs(data))
 		return (free_all(data, 'h'), 0);
-	get_map(data);
+	if (!get_map(data))
+		trucdu(data);
 	return (is_valid(data));
 }

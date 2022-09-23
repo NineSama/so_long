@@ -6,7 +6,7 @@
 /*   By: mfroissa <mfroissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 12:25:57 by mfroissa          #+#    #+#             */
-/*   Updated: 2022/09/23 19:29:44 by mfroissa         ###   ########.fr       */
+/*   Updated: 2022/09/23 21:56:24 by mfroissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 void	map_to_win_3(t_data *data, char c, int y, int x)
 {
 	char	*itoto;
-	
+
 	itoto = ft_itoa(data->pas);
 	if (c == 'A')
 	{
@@ -54,7 +54,7 @@ void	map_to_win_2(t_data *data, char c, int y, int x)
 
 void	map_to_win(t_data *data, char c, int y, int x)
 {
-	if (c == '0') // proteger mlx de merde et free tout ce qui a avant
+	if (c == '0')
 		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
 			data->image.ground, x * 100, y * 100);
 	if (c == '1')
@@ -92,7 +92,7 @@ int	transfer(t_data *data)
 		j = 0;
 		while (j < data->map.width)
 		{
-			map_to_win(data, data->map.map[i][j], i, j); //rjouter valeur de retour et free si !map_to_win
+			map_to_win(data, data->map.map[i][j], i, j);
 			j++;
 		}
 		i++;

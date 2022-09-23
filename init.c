@@ -6,7 +6,7 @@
 /*   By: mfroissa <mfroissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 20:08:05 by mfroissa          #+#    #+#             */
-/*   Updated: 2022/09/23 19:15:45 by mfroissa         ###   ########.fr       */
+/*   Updated: 2022/09/23 21:38:41 by mfroissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ int	init_pathfind(t_data *data)
 	if (!pathfind_exit(data, data->pos_y, data->pos_x))
 		return (0);
 	free_for_pf(data);
-	get_map(data);
+	if (!get_map(data))
+		return (trucdu(data), 0);
 	return (1);
 }
