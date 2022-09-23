@@ -6,7 +6,7 @@
 /*   By: mfroissa <mfroissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 12:25:57 by mfroissa          #+#    #+#             */
-/*   Updated: 2022/09/21 17:30:01 by mfroissa         ###   ########.fr       */
+/*   Updated: 2022/09/21 23:29:56 by mfroissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ void	map_to_win_2(t_data *data, char c, int y, int x)
 		data->pos_x = x;
 		data->pos_y = y;
 	}
+	mlx_string_put(data->mlx_ptr, data->win_ptr, 20, 20, 0xFEFEFF, "Nombre de pas :");
+	mlx_string_put(data->mlx_ptr, data->win_ptr, 150, 20, 0xFEFEFF, ft_itoa(data->pas));
 }
 
 void	map_to_win(t_data *data, char c, int y, int x)

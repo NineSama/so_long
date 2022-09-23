@@ -11,7 +11,9 @@ SRCS =		main.c \
 			valid.c \
 			utils.c \
 			init.c \
-			move.c
+			move.c \
+			end.c \
+			pathfinding.c
 
 _DEPS =		so_long.h
 

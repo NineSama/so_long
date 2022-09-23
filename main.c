@@ -6,7 +6,7 @@
 /*   By: mfroissa <mfroissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:18:58 by mfroissa          #+#    #+#             */
-/*   Updated: 2022/09/21 17:30:36 by mfroissa         ###   ########.fr       */
+/*   Updated: 2022/09/23 14:43:42 by mfroissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,6 @@
 #include "so_long.h"
 #include <stdlib.h>
 #include <stdio.h>
-
-#	define WINDOW_WIDTH 1000
-#	define WINDOW_HEIGHT 1000
 
 int	main(int ac, char **av)
 {
@@ -34,17 +31,17 @@ int	main(int ac, char **av)
 	data->mlx_ptr = mlx_init();
 	if (!data->mlx_ptr)
 		return (2);
-	data->win_ptr = mlx_new_window(data->mlx_ptr,
-			WINDOW_WIDTH, WINDOW_HEIGHT, "HEHEXD");
-	if (!data->win_ptr)
-		return (3);
 	data->path = av[1];
 	if (!create_map(data))
 		return (4);
+	data->win_ptr = mlx_new_window(data->mlx_ptr,
+			data->map.width * 100, data->map.height * 100, "HEHEXD");
+	if (!data->win_ptr)
+		return (3); // faut free ta mere
 	transfer(data);
-	mlx_loop_hook(data->mlx_ptr, &transfer, data);//proeger mlx et free
-	mlx_hook(data->win_ptr, KeyPress, KeyPressMask, &handle_keypress, data);//proeger mlx et free
-	// mlx_hook(data->win_ptr, KeyRelease, KeyReleaseMask, &handle_keyrelease, data);
-	mlx_loop(data->mlx_ptr);//proeger mlx et free
+	mlx_loop_hook(data->mlx_ptr, &transfer, data);
+	mlx_hook(data->win_ptr, KeyPress, KeyPressMask, &handle_keypress, data);
+	mlx_hook(data->win_ptr, 17, 0L, &trucdu, data);
+	mlx_loop(data->mlx_ptr);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mfroissa <mfroissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 16:23:45 by mfroissa          #+#    #+#             */
-/*   Updated: 2022/09/21 17:20:29 by mfroissa         ###   ########.fr       */
+/*   Updated: 2022/09/23 14:12:48 by mfroissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,12 @@
 # define S_KEY			115
 # define D_KEY			100
 # define ESC			65307
+
+typedef struct	s_pf
+{
+	int		count_cons;
+	int		count_exit;
+}				t_pf;
 
 typedef struct  s_map
 {
@@ -56,18 +62,22 @@ typedef struct  s_data
 	void    *mlx_ptr;
 	void    *win_ptr;
 	char	*path;
+	int		pas;
 	int		exit_x;
 	int		exit_y;
 	int		pos_x;
 	int		pos_y;
 	int		counter;
-	t_image  image;
-	t_map   map;
+	t_image	image;
+	t_map	map;
+	t_pf	pf;
 }               t_data;
 
 /* utils.c */
 int		ft_strlen(char *line);
-void	free_all(t_data *data, char c);
+int		len(long nb);
+char	*ft_itoa(int n);
+void	ft_putstr(char *str);
 
 /* valid.c */
 int		is_rectangle(t_data *data);
@@ -90,10 +100,25 @@ void	initialising_values(t_data *data);
 int		initialising_imgs(t_data *data);
 
 /* move.c */
-void	exit_game(t_data *data);
 int		my_exit(t_data *data, char c);
 int		check_next_case(t_data *data, char c);
+void	move_player2(t_data *data, int c);
 void	move_player(t_data *data, int c);
 int		handle_keypress(int keysym, t_data *data);
 int		handle_keyrelease(int keysym, t_data *data);
+
+/* end.c */
+void	exit_game(t_data *data);
+void	destroy_images(t_data *data);
+void	free_all(t_data *data, char c);
+int		trucdu(t_data *data);
+
+/* pathfinding.c */
+int		pathfind(t_data *data, int y, int x);
+int		pf_check_next(t_data *data, char c, int y, int x);
+int		pf_check_exit(t_data *data, char c, int y, int x);
+void	pf_move2(t_data *data, char c, int y, int x);
+void	pf_move(t_data *data, char c, int y, int x);
+void	pf_replace(t_data *data);
+
 #endif

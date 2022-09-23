@@ -6,7 +6,7 @@
 /*   By: mfroissa <mfroissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 22:23:38 by mfroissa          #+#    #+#             */
-/*   Updated: 2022/09/21 17:20:16 by mfroissa         ###   ########.fr       */
+/*   Updated: 2022/09/21 23:15:51 by mfroissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,23 @@ int	check_next_case(t_data *data, char c)
 	return (1);
 }
 
-void	exit_game(t_data *data)
+void	move_player2(t_data *data, int c)
 {
-	if (data->pos_x == data->exit_x && data->pos_y == data->exit_y)
+	if (c == 's' && check_next_case(data, c) && my_exit(data, c))
 	{
-		free_all(data, 't');
-		exit(0);
+		data->map.map[data->pos_y][data->pos_x] = '0';
+		data->pos_y += 1;
+		data->pas++;
+		data->map.map[data->pos_y][data->pos_x] = 'P';
+		exit_game(data);
+	}
+	else if (c == 'd' && check_next_case(data, c) && my_exit(data, c))
+	{
+		data->map.map[data->pos_y][data->pos_x] = '0';
+		data->pos_x += 1;
+		data->pas++;
+		data->map.map[data->pos_y][data->pos_x] = 'D';
+		exit_game(data);
 	}
 }
 
@@ -77,6 +88,7 @@ void	move_player(t_data *data, int c)
 	{
 		data->map.map[data->pos_y][data->pos_x] = '0';
 		data->pos_y -= 1;
+		data->pas++;
 		data->map.map[data->pos_y][data->pos_x] = 'W';
 		exit_game(data);
 	}
@@ -84,23 +96,12 @@ void	move_player(t_data *data, int c)
 	{
 		data->map.map[data->pos_y][data->pos_x] = '0';
 		data->pos_x -= 1;
+		data->pas++;
 		data->map.map[data->pos_y][data->pos_x] = 'A';
 		exit_game(data);
 	}
-	else if (c == 's' && check_next_case(data, c) && my_exit(data, c))
-	{
-		data->map.map[data->pos_y][data->pos_x] = '0';
-		data->pos_y += 1;
-		data->map.map[data->pos_y][data->pos_x] = 'P';
-		exit_game(data);
-	}
-	else if (c == 'd' && check_next_case(data, c) && my_exit(data, c))
-	{
-		data->map.map[data->pos_y][data->pos_x] = '0';
-		data->pos_x += 1;
-		data->map.map[data->pos_y][data->pos_x] = 'D';
-		exit_game(data);
-	}
+	else
+		move_player2(data, c);
 }
 
 int	handle_keypress(int keysym, t_data *data)
@@ -114,7 +115,3 @@ int	handle_keypress(int keysym, t_data *data)
 		move_player(data, keysym);
 	return (0);
 }
-
-// int	handle_keyrelease(int keysym, t_data *data)
-// {
-// }

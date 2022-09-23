@@ -6,7 +6,7 @@
 /*   By: mfroissa <mfroissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 20:01:49 by mfroissa          #+#    #+#             */
-/*   Updated: 2022/09/21 17:19:40 by mfroissa         ###   ########.fr       */
+/*   Updated: 2022/09/21 23:16:19 by mfroissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,39 +23,47 @@ int	ft_strlen(char *line)
 	return (i);
 }
 
-void	destroy_images(t_data *data)
-{
-	if (data->image.cons)
-		mlx_destroy_image(data->mlx_ptr, data->image.cons);
-	if (data->image.pers_left)
-		mlx_destroy_image(data->mlx_ptr, data->image.pers_left);
-	if (data->image.pers_right)
-		mlx_destroy_image(data->mlx_ptr, data->image.pers_right);
-	if (data->image.wall)
-		mlx_destroy_image(data->mlx_ptr, data->image.wall);
-	if (data->image.ground)
-		mlx_destroy_image(data->mlx_ptr, data->image.ground);
-	if (data->image.exit)
-		mlx_destroy_image(data->mlx_ptr, data->image.exit);
-}
-
-void	free_all(t_data *data, char c)
+int	len(long nb)
 {
 	int	i;
-	
+
 	i = 0;
-	if (c == 't')
+	if (nb <= 0)
 	{
-		while (i < data->map.height)
-		{
-			free(data->map.map[i]);
-			i++;
-		}
+		nb = nb * -1;
+		i++;
 	}
-	free(data->map.map);
-	destroy_images(data);
-	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
-	mlx_destroy_display(data->mlx_ptr);
-	free(data->mlx_ptr);
-	free(data);
+	while (nb != 0)
+	{
+		nb = nb / 10;
+		i++;
+	}
+	return (i);
+}
+
+char	*ft_itoa(int n)
+{
+	long	nb;
+	int		i;
+	char	*str;
+
+	nb = n;
+	i = len(nb);
+	str = malloc(sizeof(char) * (i + 1));
+	if (!str)
+		return (NULL);
+	str[i--] = '\0';
+	if (nb == 0)
+		str[i] = 48;
+	while (nb > 0)
+	{
+		str[i--] = (nb % 10) + 48;
+		nb = nb / 10;
+	}
+	return (str);
+}
+
+void	ft_putstr(char *str)
+{
+	write(1, str, ft_strlen(str));
 }

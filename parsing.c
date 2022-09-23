@@ -6,7 +6,7 @@
 /*   By: mfroissa <mfroissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 18:56:22 by mfroissa          #+#    #+#             */
-/*   Updated: 2022/09/21 17:26:45 by mfroissa         ###   ########.fr       */
+/*   Updated: 2022/09/23 14:44:20 by mfroissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,16 @@ void	get_map(t_data *data)
 	{
 		data->map.map[n_line] = malloc(sizeof(char) * (ft_strlen(line) + 1));
 		if (!data->map.map[n_line])
-			return ; // free et valeur de retour a ajouter
+			return ; //free et valeur de retour a ajouter
 		i = 0;
 		while (line[i] && line[i] != '\n')
 		{
 			data->map.map[n_line][i] = line[i];
+			if (data->map.map[n_line][i] == 'P')
+			{
+				data->pos_x = i;
+				data->pos_y = n_line;
+			}
 			i++;
 		}
 		data->map.map[n_line][i] = '\0';

@@ -6,7 +6,7 @@
 /*   By: mfroissa <mfroissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 20:08:05 by mfroissa          #+#    #+#             */
-/*   Updated: 2022/09/21 17:20:44 by mfroissa         ###   ########.fr       */
+/*   Updated: 2022/09/23 14:40:08 by mfroissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 
 int	initialising_imgs(t_data *data)
 {
-	data->image.width = 100;
-	data->image.height = 100;
 	data->image.ground = mlx_xpm_file_to_image(data->mlx_ptr,
 			"img/ground.xpm", &data->image.width, &data->image.height);
 	if (!data->image.ground)
@@ -58,4 +56,9 @@ void	initialising_values(t_data *data)
 	data->image.height = 0;
 	data->image.width = 0;
 	data->counter = 0;
+	data->pas = 0;
+	data->image.width = 100;
+	data->image.height = 100;
+	data->pf.count_cons = 0;
+	data->pf.count_exit = 0;
 }
