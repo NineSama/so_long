@@ -6,7 +6,7 @@
 /*   By: mfroissa <mfroissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 20:08:05 by mfroissa          #+#    #+#             */
-/*   Updated: 2022/09/23 14:40:08 by mfroissa         ###   ########.fr       */
+/*   Updated: 2022/09/23 19:15:45 by mfroissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,22 @@ void	initialising_values(t_data *data)
 	data->image.height = 100;
 	data->pf.count_cons = 0;
 	data->pf.count_exit = 0;
+}
+
+int	init_pathfind(t_data *data)
+{
+	while (data->pf.count_cons < data->map.count_cons)
+	{
+		get_obj(data);
+		if (!pathfind(data, data->pos_y, data->pos_x))
+			return (0);
+		data->pf.count_cons++;
+		free_for_pf(data);
+		get_map(data);
+	}
+	if (!pathfind_exit(data, data->pos_y, data->pos_x))
+		return (0);
+	free_for_pf(data);
+	get_map(data);
+	return (1);
 }

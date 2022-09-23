@@ -6,7 +6,7 @@
 /*   By: mfroissa <mfroissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 18:56:22 by mfroissa          #+#    #+#             */
-/*   Updated: 2022/09/23 14:44:20 by mfroissa         ###   ########.fr       */
+/*   Updated: 2022/09/23 19:15:18 by mfroissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,20 @@ int	get_map_height(t_data *data)
 	return (i);
 }
 
+void	get_pos_exit(t_data *data, int y, int x)
+{
+	if (data->map.map[y][x] == 'P')
+	{
+		data->pos_x = x;
+		data->pos_y = y;
+	}
+	if (data->map.map[y][x] == 'E')
+	{
+		data->exit_x = x;
+		data->exit_y = y;
+	}
+}
+
 void	get_map(t_data *data)
 {
 	int		i;
@@ -44,16 +58,12 @@ void	get_map(t_data *data)
 	{
 		data->map.map[n_line] = malloc(sizeof(char) * (ft_strlen(line) + 1));
 		if (!data->map.map[n_line])
-			return ; //free et valeur de retour a ajouter
+			return ; //truc truc
 		i = 0;
 		while (line[i] && line[i] != '\n')
 		{
 			data->map.map[n_line][i] = line[i];
-			if (data->map.map[n_line][i] == 'P')
-			{
-				data->pos_x = i;
-				data->pos_y = n_line;
-			}
+			get_pos_exit(data, n_line, i);
 			i++;
 		}
 		data->map.map[n_line][i] = '\0';

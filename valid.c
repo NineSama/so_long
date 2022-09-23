@@ -6,7 +6,7 @@
 /*   By: mfroissa <mfroissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 21:25:33 by mfroissa          #+#    #+#             */
-/*   Updated: 2022/09/23 14:46:07 by mfroissa         ###   ########.fr       */
+/*   Updated: 2022/09/23 18:02:54 by mfroissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,11 +114,10 @@ int	is_valid(t_data *data)
 		write(2, "Map not right\n", 14);
 		return (0);
 	}
-	if (!pathfind(data, data->pos_y, data->pos_x))
+	if (!init_pathfind(data))
 	{
 		write(2, "No path available\n", 18);
 		return (0);
 	}
-	pf_replace(data);
 	return (1);
 }

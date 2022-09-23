@@ -6,7 +6,7 @@
 /*   By: mfroissa <mfroissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 23:15:24 by mfroissa          #+#    #+#             */
-/*   Updated: 2022/09/21 23:17:40 by mfroissa         ###   ########.fr       */
+/*   Updated: 2022/09/23 19:23:50 by mfroissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,14 @@
 
 void	exit_game(t_data *data)
 {
+	char	*itoto;
+	
 	if (data->pos_x == data->exit_x && data->pos_y == data->exit_y)
 	{
+		itoto = ft_itoa(data->pas);
 		ft_putstr("T'as dead ca en [");
-		ft_putstr(ft_itoa(data->pas));
+		ft_putstr(itoto);
+		free(itoto);
 		ft_putstr("] coups! bv\n");
 		free_all(data, 't');
 		exit(0);
@@ -40,6 +44,19 @@ void	destroy_images(t_data *data)
 		mlx_destroy_image(data->mlx_ptr, data->image.exit);
 }
 
+void	free_for_pf(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->map.height)
+	{
+		if (data->map.map[i])
+			free(data->map.map[i]);
+		i++;
+	}
+}
+
 void	free_all(t_data *data, char c)
 {
 	int	i;
@@ -49,7 +66,8 @@ void	free_all(t_data *data, char c)
 	{
 		while (i < data->map.height)
 		{
-			free(data->map.map[i]);
+			if (data->map.map[i])
+				free(data->map.map[i]);
 			i++;
 		}
 	}

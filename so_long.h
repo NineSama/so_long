@@ -6,7 +6,7 @@
 /*   By: mfroissa <mfroissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 16:23:45 by mfroissa          #+#    #+#             */
-/*   Updated: 2022/09/23 14:12:48 by mfroissa         ###   ########.fr       */
+/*   Updated: 2022/09/23 19:29:25 by mfroissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,10 @@ typedef struct	s_pf
 {
 	int		count_cons;
 	int		count_exit;
+	int		obj_x;
+	int		obj_y;
+	int		pos_x;
+	int		pos_y;
 }				t_pf;
 
 typedef struct  s_map
@@ -92,12 +96,15 @@ int		get_map_height(t_data *data);
 int		create_map(t_data *data);
 
 /* map_to_win */
+void	map_to_win_3(t_data *data, char c, int y, int x);
+void    map_to_win_2(t_data *data, char c, int y, int x);
 void    map_to_win(t_data *data, char c, int y, int x);
 int		transfer(t_data *data);
 
 /* init.c */
 void	initialising_values(t_data *data);
 int		initialising_imgs(t_data *data);
+int		init_pathfind(t_data *data);
 
 /* move.c */
 int		my_exit(t_data *data, char c);
@@ -110,6 +117,7 @@ int		handle_keyrelease(int keysym, t_data *data);
 /* end.c */
 void	exit_game(t_data *data);
 void	destroy_images(t_data *data);
+void	free_for_pf(t_data *data);
 void	free_all(t_data *data, char c);
 int		trucdu(t_data *data);
 
@@ -117,8 +125,7 @@ int		trucdu(t_data *data);
 int		pathfind(t_data *data, int y, int x);
 int		pf_check_next(t_data *data, char c, int y, int x);
 int		pf_check_exit(t_data *data, char c, int y, int x);
-void	pf_move2(t_data *data, char c, int y, int x);
-void	pf_move(t_data *data, char c, int y, int x);
-void	pf_replace(t_data *data);
+void	get_obj(t_data *data);
+int		pathfind_exit(t_data *data, int y, int x);
 
 #endif
