@@ -6,7 +6,7 @@
 /*   By: mfroissa <mfroissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 16:23:45 by mfroissa          #+#    #+#             */
-/*   Updated: 2022/09/23 22:10:38 by mfroissa         ###   ########.fr       */
+/*   Updated: 2023/02/04 15:42:06 by mfroissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ typedef struct s_image
 	void	*cons;
 	void	*ground;
 	void	*wall;
+	void	*pers_up;
+	void	*pers_down;
 	void	*pers_right;
 	void	*pers_left;
 	void	*exit;
@@ -119,6 +121,9 @@ void	destroy_images(t_data *data);
 void	free_for_pf(t_data *data);
 void	free_all(t_data *data, char c);
 int		trucdu(t_data *data);
+
+/* free.c*/
+void free_ber(t_data *data);
 
 /* pathfinding.c */
 int		pathfind(t_data *data, int y, int x);

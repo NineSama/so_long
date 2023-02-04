@@ -6,7 +6,7 @@
 /*   By: mfroissa <mfroissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:18:58 by mfroissa          #+#    #+#             */
-/*   Updated: 2022/09/23 22:10:28 by mfroissa         ###   ########.fr       */
+/*   Updated: 2023/02/04 16:36:03 by mfroissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	main(int ac, char **av)
 	if (!check_dir(data->path))
 	{
 		write(2, "Trying to open a dir ?\n", 23);
-		return (1);
+		return (free(data), 1);
 	}
 	if (!data)
 		return (1);

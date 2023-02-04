@@ -6,7 +6,7 @@
 /*   By: mfroissa <mfroissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 18:56:22 by mfroissa          #+#    #+#             */
-/*   Updated: 2022/09/23 22:05:57 by mfroissa         ###   ########.fr       */
+/*   Updated: 2023/02/04 15:41:29 by mfroissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int	create_map(t_data *data)
 	if (!is_ber(data))
 	{
 		write(2, "Map not a .ber\n", 15);
-		return (0);
+		return (free_ber(data), 0);
 	}
 	data->map.fd = open(data->path, O_RDONLY);
 	if (!data->map.fd)

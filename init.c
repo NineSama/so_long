@@ -6,27 +6,15 @@
 /*   By: mfroissa <mfroissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 20:08:05 by mfroissa          #+#    #+#             */
-/*   Updated: 2022/09/23 21:38:41 by mfroissa         ###   ########.fr       */
+/*   Updated: 2023/02/04 16:34:28 by mfroissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 #include "get_next_line.h"
 
-int	initialising_imgs(t_data *data)
+int	initialising_imgs2(t_data *data)
 {
-	data->image.ground = mlx_xpm_file_to_image(data->mlx_ptr,
-			"img/ground.xpm", &data->image.width, &data->image.height);
-	if (!data->image.ground)
-		return (0);
-	data->image.wall = mlx_xpm_file_to_image(data->mlx_ptr,
-			"img/wall.xpm", &data->image.width, &data->image.height);
-	if (!data->image.wall)
-		return (0);
-	data->image.pers_right = mlx_xpm_file_to_image(data->mlx_ptr,
-			"img/pers_right.xpm", &data->image.width, &data->image.height);
-	if (!data->image.pers_right)
-		return (0);
 	data->image.exit = mlx_xpm_file_to_image(data->mlx_ptr,
 			"img/exit.xpm", &data->image.width, &data->image.height);
 	if (!data->image.exit)
@@ -42,6 +30,31 @@ int	initialising_imgs(t_data *data)
 	return (1);
 }
 
+int	initialising_imgs(t_data *data)
+{
+	data->image.ground = mlx_xpm_file_to_image(data->mlx_ptr,
+			"img/ground.xpm", &data->image.width, &data->image.height);
+	if (!data->image.ground)
+		return (0);
+	data->image.wall = mlx_xpm_file_to_image(data->mlx_ptr,
+			"img/wall.xpm", &data->image.width, &data->image.height);
+	if (!data->image.wall)
+		return (0);
+	data->image.pers_right = mlx_xpm_file_to_image(data->mlx_ptr,
+			"img/pers_right.xpm", &data->image.width, &data->image.height);
+	if (!data->image.pers_right)
+		return (0);
+	data->image.pers_up = mlx_xpm_file_to_image(data->mlx_ptr,
+			"img/pers_up.xpm", &data->image.width, &data->image.height);
+	if (!data->image.pers_up)
+		return (0);
+	data->image.pers_down = mlx_xpm_file_to_image(data->mlx_ptr,
+			"img/pers_down.xpm", &data->image.width, &data->image.height);
+	if (!data->image.pers_down)
+		return (0);
+	return (initialising_imgs2(data));
+}
+
 void	initialising_values(t_data *data)
 {
 	data->image.ground = NULL;
@@ -49,6 +62,8 @@ void	initialising_values(t_data *data)
 	data->image.exit = NULL;
 	data->image.cons = NULL;
 	data->image.pers_right = NULL;
+	data->image.pers_up = NULL;
+	data->image.pers_down = NULL;
 	data->image.pers_left = NULL;
 	data->map.count_pers = 0;
 	data->map.count_exit = 0;

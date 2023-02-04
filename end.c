@@ -6,7 +6,7 @@
 /*   By: mfroissa <mfroissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 23:15:24 by mfroissa          #+#    #+#             */
-/*   Updated: 2022/09/23 21:56:38 by mfroissa         ###   ########.fr       */
+/*   Updated: 2023/02/04 16:30:57 by mfroissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,10 @@ void	destroy_images(t_data *data)
 		mlx_destroy_image(data->mlx_ptr, data->image.cons);
 	if (data->image.pers_left)
 		mlx_destroy_image(data->mlx_ptr, data->image.pers_left);
+	if (data->image.pers_up)
+		mlx_destroy_image(data->mlx_ptr, data->image.pers_up);
+	if (data->image.pers_down)
+		mlx_destroy_image(data->mlx_ptr, data->image.pers_down);
 	if (data->image.pers_right)
 		mlx_destroy_image(data->mlx_ptr, data->image.pers_right);
 	if (data->image.wall)

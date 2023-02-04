@@ -6,7 +6,7 @@
 /*   By: mfroissa <mfroissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 12:25:57 by mfroissa          #+#    #+#             */
-/*   Updated: 2023/01/25 18:39:05 by mfroissa         ###   ########.fr       */
+/*   Updated: 2023/02/04 16:35:17 by mfroissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	map_to_win_2(t_data *data, char c, int y, int x)
 	if (c == 'W')
 	{
 		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
-			data->image.wall, x * 100, y * 100);
+			data->image.pers_up, x * 100, y * 100);
 		data->pos_x = x;
 		data->pos_y = y;
 	}
@@ -63,7 +63,7 @@ void	map_to_win(t_data *data, char c, int y, int x)
 	if (c == 'P')
 	{
 		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
-			data->image.wall, x * 100, y * 100);
+			data->image.pers_down, x * 100, y * 100);
 		data->pos_x = x;
 		data->pos_y = y;
 	}

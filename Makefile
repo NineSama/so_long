@@ -13,6 +13,7 @@ SRCS =		main.c \
 			init.c \
 			move.c \
 			end.c \
+			free.c \
 			pathfinding.c
 
 _DEPS =		so_long.h
